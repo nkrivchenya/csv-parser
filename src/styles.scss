@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@use './assets/styles/buttons.scss';
+@use './assets/styles/variables.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, Nunito Sans, Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: var(--dark);
+}
+
+h1, h2 {
+  font-weight: 700;
+  color: var(--dark);
+}
+
+h1 {
+  font-size: 33px;
+  line-height: 40px;
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 24px;
+}

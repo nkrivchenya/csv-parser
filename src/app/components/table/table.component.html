@@ -1,0 +1,55 @@
+<ng-container *ngIf="filter((csvService.rows$ | async) || []); let rows">
+  <ng-container 
+    *ngIf="rows[0].length ? rows.slice(((paginator.pageIndex - 1) * paginator.pageSize), ((paginator.pageIndex - 1) * paginator.pageSize) + paginator.pageSize) : []; let paginatedRows"
+  >
+    <ng-container *ngIf="csvService.columns$ | async; let columns">
+      <span class="template" *ngIf="csvService.isLoading$ | async; else table">Loading...</span>
+      <ng-template #table>
+        <table *ngIf="columns.length || paginatedRows.length; else noData">
+          <thead>
+            <tr>
+              <th *ngFor="let column of columns">{{ column }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of paginatedRows; trackBy:trackByFn">
+              <td *ngFor="let td of row">{{ td }}</td>
+            </tr>
+            <tr>
+              <td [attr.colspan]="columns.length"></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">Showing {{ ((paginator.pageIndex - 1) * paginator.pageSize) + 1 }} to {{ ((paginator.pageIndex - 1) * paginator.pageSize) + paginator.pageSize }} of {{ rows.length }} results</td>
+              <td [attr.colspan]="columns.length - 2">
+                <div class="paginator">
+                  <a 
+                    class="paginator-item" 
+                    [ngClass]="{ 'paginator-item-disabled': paginator.pageIndex - 1 < 1 }" 
+                    [routerLink]="'/'" 
+                    [queryParams]="{ page: paginator.pageIndex - 1 }"
+                  >
+                    «
+                  </a>
+                  <a 
+                    class="paginator-item" 
+                    [ngClass]="{ 'paginator-item-disabled': (paginator.pageIndex + 1) * paginator.pageSize > rows.length }" 
+                    [routerLink]="'/'" 
+                    [queryParams]="{ page: paginator.pageIndex + 1 }"
+                  >
+                    »
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </ng-template>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #noData>
+  <span class="template">No Data</span>
+</ng-template>

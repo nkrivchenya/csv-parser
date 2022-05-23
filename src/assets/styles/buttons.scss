@@ -1,0 +1,30 @@
+.button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+
+  &-solid {
+    border-radius: 5px;
+    padding: 12px 38px;
+    color: var(--white);
+
+    &-primary {
+      background: var(--primary);
+    }
+  }
+
+  &-link {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration-line: underline;
+
+    &-primary {
+      color: var(--primary);
+    }
+
+    &-danger {
+      color: var(--danger);
+    }
+  }
+}

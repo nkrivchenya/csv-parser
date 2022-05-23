@@ -1,0 +1,1 @@
+export const CSV_FILE_CONTENT = 'csv_file_content';
